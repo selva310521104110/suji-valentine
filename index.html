@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Suji ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#ffe6ee;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* FRONT GIF */
+.front-gif{
+  width:180px;
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:999;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:380px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  border:3px solid #ff4d6d;
+}
+
+h2{
+  color:#ff4d6d;
+  margin-bottom:20px;
+}
+
+/* BUTTONS */
+button{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:#fff;
+}
+
+#noBtn{
+  background:#444;
+  color:#fff;
+  position:absolute;
+}
+
+/* INPUT */
+input{
+  width:85%;
+  padding:12px;
+  border-radius:10px;
+  border:2px solid #ff4d6d;
+  text-align:center;
+  font-size:16px;
+  margin:15px 0;
+}
+
+.hidden{
+  display:none;
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  top:-20px;
+  font-size:24px;
+  animation:fall 4s linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FRONT GIF (ONLINE – ALWAYS WORKS) -->
+<img src="https://media.tenor.com/1bG0U4H6q0EAAAAi/cute-love.gif" class="front-gif">
+
+<!-- STEP 1 -->
+<div class="card" id="step1">
+  <h2>Hey Suji ❤️</h2>
+  <p>Will you be my Valentine?</p><br>
+  <button id="yesBtn" onclick="goStep2()">YES 💖</button>
+  <button id="noBtn">NO 😜</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="card hidden" id="step2">
+  <h2>Enter Our Secret 💌</h2>
+  <input type="text" id="pass" placeholder="Password">
+  <br>
+  <button id="yesBtn" onclick="checkPass()">Unlock ❤️</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="card hidden" id="step3">
+  <h2>I Love You Suji 💕</h2>
+  <img src="https://i.ibb.co/RGhPFMLk/suji.jpg" style="width:100%;border-radius:15px;border:4px solid #ff4d6d;">
+  <p style="margin-top:15px;font-style:italic;">
+    You are my today and all my tomorrows ✨
+  </p>
+  <br>
+  <button id="yesBtn" onclick="playSong()">Play Song 🎶</button>
+</div>
+
+<!-- AUDIO (MANUAL PLAY – GITHUB SAFE) -->
+<audio id="song">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* NO BUTTON MOVE */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", ()=>{
+  const x = Math.random()*(window.innerWidth-100);
+  const y = Math.random()*(window.innerHeight-60);
+  noBtn.style.left = x+"px";
+  noBtn.style.top = y+"px";
+});
+
+/* STEP CHANGE */
+function goStep2(){
+  document.getElementById("step1").classList.add("hidden");
+  document.getElementById("step2").classList.remove("hidden");
+}
+
+/* PASSWORD */
+function checkPass(){
+  const p = document.getElementById("pass").value.toLowerCase();
+  if(p === "selvasuji"){
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
+    startHearts();
+  }else{
+    alert("Wrong password 😜");
+  }
+}
+
+/* HEART RAIN */
+function startHearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💗";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },200);
+}
+
+/* SONG PLAY */
+function playSong(){
+  document.getElementById("song").play();
+}
+</script>
+
+</body>
+</html>
